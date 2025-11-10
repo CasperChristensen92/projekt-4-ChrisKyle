@@ -1,5 +1,5 @@
 package model;
 
 public enum PladsType {
-    STANDARD, EKSTRABEN,KØRETYPE;
+    STANDARD, EKSTRABEN, KØRESTOL;
 }
