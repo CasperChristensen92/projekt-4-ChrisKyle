@@ -1,13 +1,18 @@
 package storage;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import model.*;
 
 import java.util.ArrayList;
 
 public class Storage {
-    private static ArrayList<Kunde> kunder = new ArrayList<>();
-    private static ArrayList<Plads> pladser = new ArrayList<>();
-    private static ArrayList<Forestilling> forestillinger = new ArrayList<>();
+    private static ObservableList<Kunde> kunder = FXCollections.observableArrayList();
+    private static ObservableList<Plads> pladser = FXCollections.observableArrayList();
+    private static ObservableList<Forestilling> forestillinger = FXCollections.observableArrayList();
+    //private static ArrayList<Kunde> kunder = new ArrayList<>();
+    //private static ArrayList<Plads> pladser = new ArrayList<>();
+    //private static ArrayList<Forestilling> forestillinger = new ArrayList<>();
 
     public static void addKunde(Kunde kunde){
         if (!kunder.contains(kunde)) {
@@ -27,15 +32,15 @@ public class Storage {
         }
     }
 
-    public static ArrayList<Forestilling> getForestillinger() {
+    public static ObservableList<Forestilling> getForestillinger() {
         return forestillinger;
     }
 
-    public static ArrayList<Kunde> getKunder() {
+    public static ObservableList<Kunde> getKunder() {
         return kunder;
     }
 
-    public static ArrayList<Plads> getPladser() {
+    public static ObservableList<Plads> getPladser() {
         return pladser;
     }
 
