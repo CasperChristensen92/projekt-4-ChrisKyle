@@ -7,12 +7,10 @@ import model.*;
 import java.util.ArrayList;
 
 public class Storage {
-    private static ObservableList<Kunde> kunder = FXCollections.observableArrayList();
-    private static ObservableList<Plads> pladser = FXCollections.observableArrayList();
-    private static ObservableList<Forestilling> forestillinger = FXCollections.observableArrayList();
-    //private static ArrayList<Kunde> kunder = new ArrayList<>();
-    //private static ArrayList<Plads> pladser = new ArrayList<>();
-    //private static ArrayList<Forestilling> forestillinger = new ArrayList<>();
+    private static final ObservableList<Kunde> kunder = FXCollections.observableArrayList();
+    private static final ObservableList<Plads> pladser = FXCollections.observableArrayList();
+    private static final ObservableList<Forestilling> forestillinger = FXCollections.observableArrayList();
+
 
     public static void addKunde(Kunde kunde){
         if (!kunder.contains(kunde)) {

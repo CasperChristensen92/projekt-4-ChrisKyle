@@ -1,10 +1,10 @@
 package model;
 
 public class Plads {
-    private int række;
-    private int nr;
-    private int pris;
-    private PladsType pladsType;
+    private final int række;
+    private final int nr;
+    private final int pris;
+    private final PladsType pladsType;
 
     public Plads(int række, int nr, int pris, PladsType pladsType) {
         this.række = række;

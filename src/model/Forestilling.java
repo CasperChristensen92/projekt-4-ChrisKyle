@@ -4,10 +4,10 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Forestilling {
-    private String navn;
-    private LocalDate startDato;
-    private LocalDate slutDato;
-    private ArrayList<Bestilling> bestillinger = new ArrayList<>();
+    private final String navn;
+    private final LocalDate startDato;
+    private final LocalDate slutDato;
+    private final ArrayList<Bestilling> bestillinger = new ArrayList<>();
 
     public Forestilling(String navn, LocalDate startDato, LocalDate slutDato) {
         this.navn = navn;
@@ -20,11 +20,8 @@ public class Forestilling {
     }
 
     public Bestilling createBestilling(LocalDate date, Kunde kunde, ArrayList<Plads> pladser){
-        Bestilling bestilling = new Bestilling(date, kunde, pladser);
+        Bestilling bestilling = new Bestilling(this, date, kunde, pladser);
         bestillinger.add(bestilling);
-        bestilling.setForestilling(this);
-        bestilling.setKunde(kunde);
-        bestilling.setPladser(pladser);
         kunde.addBestilling(bestilling);
         return bestilling;
     }
@@ -39,6 +36,41 @@ public class Forestilling {
 
     public LocalDate getSlutDato() {
         return slutDato;
+    }
+
+    public boolean erPladsLedig(int række, int nr, LocalDate dato){
+        for (Bestilling bestilling : bestillinger){
+            if (bestilling.getDate().equals(dato)){
+                for (Plads plads : bestilling.getPladser()) {
+                    if (plads.getNr() == nr && plads.getRække() == række){
+                        return false;
+                    }
+                }
+            }
+        }
+        return true;
+    }
+
+    public int antalBestiltePladserPåDag(LocalDate dato){
+        int sumAntalDage = 0;
+        for (Bestilling bestilling : bestillinger){
+            sumAntalDage += bestilling.getPladser().size();
+        }
+        return sumAntalDage;
+    }
+
+    public LocalDate succesDato (){
+        LocalDate dato = startDato;
+        LocalDate endDato = slutDato.plusDays(1);
+        LocalDate bestDato = startDato;
+        int bestAntal = 0;
+        for (int i = 0; dato.plusDays(i).isBefore(endDato); i++) {
+            if (antalBestiltePladserPåDag(dato)>bestAntal){
+                bestAntal = antalBestiltePladserPåDag(dato);
+                bestDato = dato.plusDays(i);
+            }
+        }
+        return bestDato;
     }
 
     @Override
